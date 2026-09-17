@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+<title>MAX - Tu atención médica, organizada en un solo lugar</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-container-lowest": "#ffffff",
+            "on-background": "#0e1c2d",
+            "on-surface-variant": "#424753",
+            "surface-variant": "#d5e4fa",
+            "surface-container-highest": "#d5e4fa",
+            "surface-container-high": "#dbe9ff",
+            "on-secondary": "#ffffff",
+            "surface-dim": "#ccdbf1",
+            "primary": "#2F78E6",
+            "inverse-surface": "#0B1A2A",
+            "on-primary-container": "#fefcff",
+            "secondary": "#5AA9F3",
+            "outline": "#727785",
+            "background": "#F2F7FF",
+            "surface-container": "#e5eeff",
+            "surface-container-low": "#eef4ff",
+            "on-surface": "#0e1c2d",
+            "surface-bright": "#f8f9ff",
+            "surface": "#f8f9ff",
+            "primary-container": "#2064c5",
+            "brand-dark": "#0B1A2A",
+            "brand-soft": "#DBE7F6"
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          spacing: {
+            "gutter-mobile": "1rem",
+            "gutter": "1.5rem",
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2.5rem"
+          },
+          fontFamily: {
+            "headline-lg": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "headline-lg-mobile": ["Plus Jakarta Sans"],
+            "display-lg-mobile": ["Plus Jakarta Sans"],
+            "body-lg": ["Inter"],
+            "body-md": ["Inter"],
+            "body-sm": ["Inter"],
+            "label-lg": ["Inter"],
+            "label-md": ["Inter"],
+            "label-sm": ["Inter"]
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    @layer base {
+      html, body {
+        width: 100vw;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        overscroll-behavior: none;
+        min-height: max(884px, 100dvh);
+      }
+      .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+      .pt-safe { padding-top: env(safe-area-inset-top, 0px); }
+    }
+    ::-webkit-scrollbar { display: none; }
+  </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md antialiased min-h-screen flex flex-col selection:bg-primary/20 selection:text-primary">
+<!-- 1. NAVBAR -->
+<header class="fixed top-0 w-full z-50 pt-safe bg-surface/85 backdrop-blur-xl border-b border-[#DBE7F6]/60 shadow-[0_2px_12px_rgba(11,26,42,0.03)]">
+<div class="h-16 px-gutter-mobile flex items-center justify-between">
+<a class="flex items-center gap-1.5 focus:outline-none" href="#hero">
+<span class="sr-only">MAX HealthTech</span>
+<svg class="h-8 w-auto" fill="none" viewbox="0 0 160 48" xmlns="http://www.w3.org/2000/svg">
+<rect fill="url(#brandGrad)" height="36" rx="10" width="36" x="2" y="6"></rect>
+<path d="M12 28L18 16L22 23L25 19L28 28" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+<circle cx="28" cy="28" fill="#FFFFFF" r="1.5"></circle>
+<text fill="#0B1A2A" font-family="'Plus Jakarta Sans', sans-serif" font-size="24" font-weight="800" letter-spacing="-0.5px" x="46" y="32">MAX</text>
+<circle cx="106" cy="20" fill="#2F78E6" r="3.5"></circle>
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="brandGrad" x1="2" x2="38" y1="6" y2="42">
+<stop stop-color="#2F78E6"></stop>
+<stop offset="1" stop-color="#5AA9F3"></stop>
+</lineargradient>
+</defs>
+</svg>
+</a>
+<div class="flex items-center gap-space-sm">
+<a class="h-9 px-3 rounded-lg bg-surface-container text-primary font-label-md text-[13px] font-semibold flex items-center gap-1 hover:bg-surface-container-high transition-colors" href="#contacto">
+<span>Acceder</span>
+</a>
+<button aria-label="Abrir navegación" class="w-10 h-10 rounded-lg flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors" id="menuToggle">
+<span class="material-symbols-outlined text-[24px]">menu</span>
+</button>
+</div>
+</div>
+<!-- Mobile dropdown menu -->
+<div class="hidden fixed inset-x-0 top-16 bg-surface-container-lowest/95 backdrop-blur-2xl shadow-[0_16px_32px_rgba(11,26,42,0.08)] px-gutter-mobile py-space-lg flex flex-col gap-space-md border-b border-[#DBE7F6]" id="mobileMenu">
+<div class="flex flex-col gap-space-xs font-label-lg">
+<a class="px-space-md py- space-sm py-2 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors flex items-center min-h-[44px]" href="#hero">Inicio</a>
+<a class="px-space-md py-2 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors flex items-center min-h-[44px]" href="#nosotros">Nosotros</a>
+<a class="px-space-md py-2 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors flex items-center min-h-[44px]" href="#funcionalidades">Funcionalidades</a>
+<a class="px-space-md py-2 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors flex items-center min-h-[44px]" href="#mision-vision">Misión y visión</a>
+<a class="px-space-md py-2 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors flex items-center min-h-[44px]" href="#valores">Valores</a>
+<a class="px-space-md py-2 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors flex items-center min-h-[44px]" href="#contacto">Contacto</a>
+</div>
+<div class="pt-space-xs">
+<a class="w-full py-2.5 px-space-md rounded-xl bg-primary hover:bg-primary-container text-on-primary font-label-lg transition-all shadow-[0_2px_8px_rgba(47,120,230,0.25)] flex items-center justify-center gap-space-xs" href="#contacto">
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+<span>Comenzar con MAX</span>
+</a>
+</div>
+</div>
+</header>
+<main class="flex-1 flex flex-col relative w-full pt-16 bg-surface">
+<!-- 2. HERO SECTION -->
+<section class="relative w-full px-gutter-mobile py-space-xl overflow-hidden bg-gradient-to-b from-[#F2F7FF] via-surface to-[#F2F7FF]" id="hero">
+<div class="absolute -top-16 -right-16 w-72 h-72 rounded-full bg-primary/10 blur-3xl pointer-events-none"></div>
+<div class="absolute top-1/2 -left-20 w-80 h-80 rounded-full bg-secondary/15 blur-3xl pointer-events-none"></div>
+<div class="relative z-10 flex flex-col items-center text-center gap-space-md max-w-xl mx-auto">
+<!-- Título principal -->
+<h1 class="font-display-lg-mobile text-[30px] leading-[38px] text-on-surface font-bold tracking-tight">
+          Tu atención médica, <span class="text-primary">organizada</span> en un solo lugar.
+        </h1>
+<!-- Descripción -->
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+          MAX conecta médicos y pacientes en una plataforma diseñada para gestionar citas y documentación médica de forma sencilla, organizada y segura.
+        </p>
+<!-- Dos botones CTA -->
+<div class="flex flex-col sm:flex-row w-full gap-space-sm pt-space-xs">
+<a class="w-full sm:w-auto flex-1 min-h-[48px] px-space-lg rounded-xl bg-primary text-on-primary font-label-lg flex items-center justify-center gap-space-xs shadow-[0_4px_16px_rgba(47,120,230,0.28)] hover:bg-primary-container transition-all" href="#contacto">
+<span>Comenzar con MAX</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+<a class="w-full sm:w-auto flex-1 min-h-[48px] px-space-lg rounded-xl bg-surface-container-lowest text-on-surface font-label-lg flex items-center justify-center shadow-[0_2px_8px_rgba(11,26,42,0.04)] hover:bg-surface-container-low border border-[#DBE7F6] transition-colors" href="#funcionalidades">
+<span>Conocer la plataforma</span>
+</a>
+</div>
+<!-- 3 badges o indicadores visuales con iconos minimalistas -->
+<div class="w-full flex flex-col gap-2 pt-space-xs">
+<div class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-surface-container-lowest/80 border border-[#DBE7F6] text-on-surface text-left shadow-sm">
+<span class="material-symbols-outlined text-primary text-[20px] shrink-0">calendar_month</span>
+<span class="font-label-md text-[13px] text-on-surface font-medium">Gestión de citas</span>
+</div>
+<div class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-surface-container-lowest/80 border border-[#DBE7F6] text-on-surface text-left shadow-sm">
+<span class="material-symbols-outlined text-primary text-[20px] shrink-0">folder_special</span>
+<span class="font-label-md text-[13px] text-on-surface font-medium">Documentación organizada</span>
+</div>
+<div class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-surface-container-lowest/80 border border-[#DBE7F6] text-on-surface text-left shadow-sm">
+<span class="material-symbols-outlined text-primary text-[20px] shrink-0">sync_alt</span>
+<span class="font-label-md text-[13px] text-on-surface font-medium">Médicos y pacientes conectados</span>
+</div>
+</div>
+<!-- DASHBOARD MOCKUP INTERACTIVO -->
+<div class="w-full mt-space-md">
+<div class="bg-surface-container-lowest rounded-2xl shadow-[0_16px_36px_rgba(11,26,42,0.08)] border border-[#DBE7F6] p-space-md flex flex-col gap-space-md text-left">
+<!-- Mockup Header -->
+<div class="flex items-center justify-between pb-2 border-b border-[#DBE7F6]">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+<span class="font-headline-sm text-[16px] text-on-surface font-semibold">Resumen de atención</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">notifications_none</span>
+</div>
+<!-- Tarjeta 'Próxima consulta' -->
+<div class="bg-gradient-to-br from-[#F2F7FF] to-surface-container rounded-xl p-3.5 border border-[#DBE7F6] flex flex-col gap-1.5 shadow-sm">
+<span class="font-label-sm text-[11px] text-primary uppercase font-bold tracking-wider">Próxima consulta</span>
+<div class="flex items-start gap-3 pt-0.5">
+<div class="w-10 h-10 rounded-xl bg-surface-container-lowest flex items-center justify-center text-primary shrink-0 shadow-sm border border-[#DBE7F6]/50">
+<span class="material-symbols-outlined text-[22px]">medical_services</span>
+</div>
+<div class="flex flex-col min-w-0">
+<p class="font-headline-sm text-[15px] font-semibold text-on-surface truncate">Dr. Alejandro Morales</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Cardiología Clínica</p>
+<div class="flex items-center gap-1.5 mt-1 text-primary font-label-md text-[12px]">
+<span class="material-symbols-outlined text-[15px]">schedule</span>
+<span>Mañana 10:30 AM</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Accesos rápidos -->
+<div class="flex flex-col gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Accesos rápidos</span>
+<div class="grid grid-cols-3 gap-2">
+<div class="bg-surface-container-low p-2.5 rounded-xl border border-[#DBE7F6]/60 flex flex-col items-center gap-1 text-center">
+<span class="material-symbols-outlined text-primary text-[20px]">prescriptions</span>
+<span class="font-label-md text-[12px] text-on-surface font-medium">Recetas</span>
+</div>
+<div class="bg-surface-container-low p-2.5 rounded-xl border border-[#DBE7F6]/60 flex flex-col items-center gap-1 text-center">
+<span class="material-symbols-outlined text-primary text-[20px]">biotech</span>
+<span class="font-label-md text-[12px] text-on-surface font-medium">Resultados</span>
+</div>
+<div class="bg-surface-container-low p-2.5 rounded-xl border border-[#DBE7F6]/60 flex flex-col items-center gap-1 text-center">
+<span class="material-symbols-outlined text-primary text-[20px]">description</span>
+<span class="font-label-md text-[12px] text-on-surface font-medium">Informes</span>
+</div>
+</div>
+</div>
+<!-- Documentos recientes -->
+<div class="flex flex-col gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Documentos recientes</span>
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center gap-2.5 p-2.5 rounded-xl bg-surface-container-low/70 border border-[#DBE7F6]/60">
+<span class="material-symbols-outlined text-primary text-[18px]">lab_profile</span>
+<span class="font-label-md text-[13px] text-on-surface font-medium">Hemograma Completo</span>
+</div>
+<div class="flex items-center gap-2.5 p-2.5 rounded-xl bg-surface-container-low/70 border border-[#DBE7F6]/60">
+<span class="material-symbols-outlined text-primary text-[18px]">ecg_heart</span>
+<span class="font-label-md text-[13px] text-on-surface font-medium">Ecocardiograma Doppler</span>
+</div>
+<div class="flex items-center gap-2.5 p-2.5 rounded-xl bg-surface-container-low/70 border border-[#DBE7F6]/60">
+<span class="material-symbols-outlined text-primary text-[18px]">clinical_notes</span>
+<span class="font-label-md text-[13px] text-on-surface font-medium">Informe médico</span>
+</div>
+<div class="flex items-center gap-2.5 p-2.5 rounded-xl bg-surface-container-low/70 border border-[#DBE7F6]/60">
+<span class="material-symbols-outlined text-primary text-[18px]">science</span>
+<span class="font-label-md text-[13px] text-on-surface font-medium">Resultado de laboratorio</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. SOBRE NOSOTROS ('¿Quiénes somos?') -->
+<section class="w-full px-gutter-mobile py-space-xl bg-surface" id="nosotros">
+<div class="flex flex-col gap-space-lg max-w-xl mx-auto">
+<div class="flex flex-col gap-space-xs text-left">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container text-primary font-label-md text-label-md self-start">
+<span class="material-symbols-outlined text-[16px]">groups</span>
+<span>Sobre Nosotros</span>
+</div>
+<h2 class="font-headline-lg-mobile text-[24px] leading-[32px] text-on-surface font-semibold pt-1">
+            Tecnología que acerca médicos y pacientes
+          </h2>
+<p class="font-body-md text-body-md text-on-surface-variant pt-space-xs leading-relaxed">
+            MAX es una startup tecnológica enfocada en mejorar la interacción entre médicos y pacientes mediante una plataforma digital. La solución busca centralizar la gestión de citas y documentos relacionados con la atención, como recetas, informes, resultados de exámenes y estudios médicos.
+          </p>
+</div>
+<!-- 3 tarjetas conceptuales con iconos limpios -->
+<div class="grid grid-cols-1 gap-space-sm">
+<!-- Tarjeta 1 (Icono calendario) -->
+<div class="p-space-md rounded-xl bg-surface-container-low border border-[#DBE7F6] flex items-start gap-space-md shadow-sm">
+<div class="w-10 h-10 rounded-xl bg-surface-container text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">calendar_today</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<h3 class="font-headline-sm text-[16px] text-on-surface font-semibold">Citas organizadas</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                Gestiona y consulta las citas médicas desde un mismo espacio digital.
+              </p>
+</div>
+</div>
+<!-- Tarjeta 2 (Icono carpeta/documento) -->
+<div class="p-space-md rounded-xl bg-surface-container-low border border-[#DBE7F6] flex items-start gap-space-md shadow-sm">
+<div class="w-10 h-10 rounded-xl bg-surface-container text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">folder_open</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<h3 class="font-headline-sm text-[16px] text-on-surface font-semibold">Documentación centralizada</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                Mantén recetas, informes, resultados y estudios médicos organizados en un solo lugar.
+              </p>
+</div>
+</div>
+<!-- Tarjeta 3 (Icono personas/conexión) -->
+<div class="p-space-md rounded-xl bg-surface-container-low border border-[#DBE7F6] flex items-start gap-space-md shadow-sm">
+<div class="w-10 h-10 rounded-xl bg-surface-container text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">diversity_3</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<h3 class="font-headline-sm text-[16px] text-on-surface font-semibold">Médicos y pacientes conectados</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                Facilita el acceso y seguimiento de la información compartida entre médicos y pacientes.
+              </p>
+</div>
+</div>
+</div>
+<!-- Composición visual de apoyo limpia -->
+<div class="relative rounded-2xl overflow-hidden shadow-sm bg-surface-container border border-[#DBE7F6]">
+<img alt="Atención médica y tecnología" class="w-full h-44 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBq9HPpuZSs7sv9GC7CQXvjnkfMARgb_pbIxnl4kRIzYIs4sHyBZ4ByLjX5Bjx6xBsotYQ3uWzxlciCE2ZrolVcWjG6S2T0T6cR6tld32wN79_6mGII3VYBIz5g-PfBVrR026CyHxoA7BVzmTiC-wkrjz8Xjrn3uFQnDL7QEo8AT1XSMkl25ZsO5nlAm92AUaFBeWCpEMYOzP8hNJEay-R_8OBEKYpCU5Ue-eEu5MAJccXqcrch_a39"/>
+<div class="p-space-md bg-surface-container-lowest flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Atención médica organizada</span>
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. FUNCIONALIDADES ('¿Qué puedes hacer con MAX?') -->
+<section class="w-full px-gutter-mobile py-space-xl bg-[#F2F7FF]" id="funcionalidades">
+<div class="flex flex-col gap-space-lg max-w-xl mx-auto">
+<div class="flex flex-col gap-space-xs text-left">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container text-primary font-label-md text-label-md self-start">
+<span class="material-symbols-outlined text-[16px]">tune</span>
+<span>Funcionalidades</span>
+</div>
+<h2 class="font-headline-lg-mobile text-[24px] leading-[32px] text-on-surface font-semibold">
+            ¿Qué puedes hacer con MAX?
+          </h2>
+</div>
+<!-- 6 cards en stack vertical móvil con iconografía minimalista -->
+<div class="flex flex-col gap-space-sm">
+<!-- Card 1 -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest border border-[#DBE7F6] shadow-sm flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-surface-container text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">calendar_month</span>
+</div>
+<div class="flex flex-col gap-1 min-w-0">
+<h3 class="font-headline-sm text-[16px] text-on-surface font-semibold">Gestiona tus citas</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Organiza y consulta las citas médicas desde una misma plataforma.
+              </p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest border border-[#DBE7F6] shadow-sm flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-surface-container text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">folder_special</span>
+</div>
+<div class="flex flex-col gap-1 min-w-0">
+<h3 class="font-headline-sm text-[16px] text-on-surface font-semibold">Documentación centralizada</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Mantén recetas, informes, resultados de exámenes y estudios médicos organizados digitalmente.
+              </p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest border border-[#DBE7F6] shadow-sm flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-surface-container text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">touch_app</span>
+</div>
+<div class="flex flex-col gap-1 min-w-0">
+<h3 class="font-headline-sm text-[16px] text-on-surface font-semibold">Acceso sencillo</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Consulta la información relacionada con la atención médica de manera rápida y organizada.
+              </p>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest border border-[#DBE7F6] shadow-sm flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-surface-container text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">chat</span>
+</div>
+<div class="flex flex-col gap-1 min-w-0">
+<h3 class="font-headline-sm text-[16px] text-on-surface font-semibold">Comunicación médico-paciente</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Facilita la interacción y el seguimiento de la atención entre médicos y pacientes.
+              </p>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest border border-[#DBE7F6] shadow-sm flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-surface-container text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">inventory_2</span>
+</div>
+<div class="flex flex-col gap-1 min-w-0">
+<h3 class="font-headline-sm text-[16px] text-on-surface font-semibold">Información organizada</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Mantén la documentación relacionada con la atención médica almacenada y organizada dentro de la plataforma.
+              </p>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest border border-[#DBE7F6] shadow-sm flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-surface-container text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">hub</span>
+</div>
+<div class="flex flex-col gap-1 min-w-0">
+<h3 class="font-headline-sm text-[16px] text-on-surface font-semibold">Todo en un solo lugar</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Reduce la dispersión de documentos y permite mantener la información relevante dentro de MAX.
+              </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. MISIÓN Y VISIÓN -->
+<section class="w-full px-gutter-mobile py-space-xl bg-surface" id="mision-vision">
+<div class="flex flex-col gap-space-md max-w-xl mx-auto">
+<!-- Card Misión -->
+<div class="p-space-lg rounded-2xl bg-surface-container-lowest border border-[#DBE7F6] shadow-sm flex flex-col gap-space-sm">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container text-primary font-label-md text-label-md self-start">
+<span class="material-symbols-outlined text-[16px]">flag</span>
+<span>Misión</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed pt-1">
+            Facilitar la interacción entre médicos y pacientes mediante una solución tecnológica que permita gestionar citas y documentación médica de manera organizada, accesible y segura.
+          </p>
+</div>
+<!-- Card Visión -->
+<div class="p-space-lg rounded-2xl bg-[#0B1A2A] text-on-primary shadow-md flex flex-col gap-space-sm">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-white font-label-md text-label-md self-start">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+<span>Visión</span>
+</div>
+<p class="font-body-md text-body-md text-white/90 leading-relaxed pt-1">
+            Convertirse en una plataforma tecnológica reconocida por mejorar la experiencia y comunicación entre médicos y pacientes, ofreciendo soluciones innovadoras que faciliten el seguimiento de la atención médica.
+          </p>
+</div>
+</div>
+</section>
+<!-- 6. NUESTROS VALORES ('Los principios que guían MAX') -->
+<section class="w-full px-gutter-mobile py-space-xl bg-[#F2F7FF]" id="valores">
+<div class="flex flex-col gap-space-lg max-w-xl mx-auto">
+<div class="flex flex-col gap-space-xs text-left">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container text-primary font-label-md text-label-md self-start">
+<span class="material-symbols-outlined text-[16px]">diamond</span>
+<span>Valores</span>
+</div>
+<h2 class="font-headline-lg-mobile text-[24px] leading-[32px] text-on-surface font-semibold">
+            Los principios que guían MAX
+          </h2>
+</div>
+<!-- 5 tarjetas limpias con iconos -->
+<div class="flex flex-col gap-space-sm">
+<!-- Valor 1 -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest border border-[#DBE7F6] shadow-sm flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-surface-container text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">lightbulb</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<span class="font-headline-sm text-[16px] text-on-surface font-semibold">Innovación</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                Buscamos constantemente nuevas formas de mejorar la experiencia de médicos y pacientes mediante la tecnología.
+              </p>
+</div>
+</div>
+<!-- Valor 2 -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest border border-[#DBE7F6] shadow-sm flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-surface-container text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">security</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<span class="font-headline-sm text-[16px] text-on-surface font-semibold">Seguridad</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                Priorizamos la protección de la información de nuestros usuarios.
+              </p>
+</div>
+</div>
+<!-- Valor 3 -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest border border-[#DBE7F6] shadow-sm flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-surface-container text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">handshake</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<span class="font-headline-sm text-[16px] text-on-surface font-semibold">Confianza</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                Promovemos una relación transparente entre médicos, pacientes y la plataforma.
+              </p>
+</div>
+</div>
+<!-- Valor 4 -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest border border-[#DBE7F6] shadow-sm flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-surface-container text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">accessibility_new</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<span class="font-headline-sm text-[16px] text-on-surface font-semibold">Accesibilidad</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                Desarrollamos una solución sencilla y fácil de utilizar.
+              </p>
+</div>
+</div>
+<!-- Valor 5 -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest border border-[#DBE7F6] shadow-sm flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-surface-container text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">health_and_safety</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<span class="font-headline-sm text-[16px] text-on-surface font-semibold">Responsabilidad</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                Reconocemos la sensibilidad de la información gestionada y el impacto que nuestra solución puede generar en sus usuarios.
+              </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 7. CÓMO FUNCIONA -->
+<section class="w-full px-gutter-mobile py-space-xl bg-surface">
+<div class="flex flex-col gap-space-lg max-w-xl mx-auto">
+<div class="flex flex-col gap-space-xs text-left">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container text-primary font-label-md text-label-md self-start">
+<span class="material-symbols-outlined text-[16px]">route</span>
+<span>Flujo</span>
+</div>
+<h2 class="font-headline-lg-mobile text-[24px] leading-[32px] text-on-surface font-semibold">
+            Cómo funciona
+          </h2>
+</div>
+<!-- 3 Pasos conectados visualmente -->
+<div class="flex flex-col gap-space-md relative">
+<div class="absolute left-5 top-7 bottom-7 w-0.5 bg-[#DBE7F6] -z-0"></div>
+<!-- Paso 01 -->
+<div class="relative z-10 flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-primary text-on-primary flex items-center justify-center font-headline-sm text-[16px] font-bold shrink-0 shadow-sm">
+              01
+            </div>
+<div class="p-space-md rounded-xl bg-[#F2F7FF] border border-[#DBE7F6] flex flex-col gap-1 flex-1 shadow-sm">
+<span class="font-headline-sm text-[16px] text-on-surface font-semibold">Regístrate</span>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Crea tu cuenta como médico o paciente para comenzar a utilizar MAX.
+              </p>
+</div>
+</div>
+<!-- Paso 02 -->
+<div class="relative z-10 flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-primary text-on-primary flex items-center justify-center font-headline-sm text-[16px] font-bold shrink-0 shadow-sm">
+              02
+            </div>
+<div class="p-space-md rounded-xl bg-[#F2F7FF] border border-[#DBE7F6] flex flex-col gap-1 flex-1 shadow-sm">
+<span class="font-headline-sm text-[16px] text-on-surface font-semibold">Gestiona tu atención</span>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Organiza citas y gestiona la documentación relacionada con la atención desde MAX.
+              </p>
+</div>
+</div>
+<!-- Paso 03 -->
+<div class="relative z-10 flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-[#0B1A2A] text-white flex items-center justify-center font-headline-sm text-[16px] font-bold shrink-0 shadow-sm">
+              03
+            </div>
+<div class="p-space-md rounded-xl bg-[#F2F7FF] border border-[#DBE7F6] flex flex-col gap-1 flex-1 shadow-sm">
+<span class="font-headline-sm text-[16px] text-on-surface font-semibold">Mantén todo organizado</span>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Consulta la información relacionada con tu atención desde un único espacio digital.
+              </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 8. PARA PACIENTES Y PARA MÉDICOS (Doble tarjeta) -->
+<section class="w-full px-gutter-mobile py-space-xl bg-[#F2F7FF]">
+<div class="flex flex-col gap-space-lg max-w-xl mx-auto">
+<div class="flex flex-col gap-space-md">
+<!-- Card Pacientes -->
+<div class="p-space-lg rounded-2xl bg-surface-container-lowest border border-[#DBE7F6] shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-surface-container text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">person</span>
+</div>
+<h3 class="font-headline-sm text-[20px] text-on-surface font-bold">Para pacientes</h3>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface">Consulta tus próximas citas.</span>
+</div>
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface">Accede a tus recetas.</span>
+</div>
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface">Consulta informes médicos.</span>
+</div>
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface">Revisa resultados y estudios médicos.</span>
+</div>
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface">Mantén organizada tu documentación relacionada con la atención.</span>
+</div>
+</div>
+<a class="w-full min-h-[46px] px-space-md rounded-xl bg-primary text-on-primary font-label-lg flex items-center justify-center gap-2 shadow-[0_2px_8px_rgba(47,120,230,0.25)] hover:bg-primary-container transition-colors" href="#contacto">
+<span>Soy paciente</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+<!-- Card Médicos -->
+<div class="p-space-lg rounded-2xl bg-surface-container-high border border-[#DBE7F6] shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-surface-container-lowest text-primary flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[22px]">stethoscope</span>
+</div>
+<h3 class="font-headline-sm text-[20px] text-on-surface font-bold">Para médicos</h3>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface">Gestiona tus citas.</span>
+</div>
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface">Consulta las citas programadas con tus pacientes.</span>
+</div>
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface">Sube recetas.</span>
+</div>
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface">Adjunta informes médicos.</span>
+</div>
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface">Adjunta resultados y estudios médicos.</span>
+</div>
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface">Mantén organizada la documentación relacionada con la atención de tus pacientes.</span>
+</div>
+</div>
+<a class="w-full min-h-[46px] px-space-md rounded-xl bg-surface-container-lowest text-on-surface font-label-lg flex items-center justify-center gap-2 border border-[#DBE7F6] shadow-sm hover:bg-surface-container transition-colors" href="#contacto">
+<span>Soy médico</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- 9. CTA FINAL -->
+<section class="w-full px-gutter-mobile py-space-xl bg-[#0B1A2A] text-white relative overflow-hidden" id="contacto">
+<div class="absolute -top-12 -left-12 w-64 h-64 rounded-full bg-primary/20 blur-3xl pointer-events-none"></div>
+<div class="absolute -bottom-16 -right-16 w-72 h-72 rounded-full bg-secondary/15 blur-3xl pointer-events-none"></div>
+<div class="relative z-10 flex flex-col gap-space-lg max-w-xl mx-auto text-center items-center">
+<div class="flex flex-col gap-space-xs">
+<h2 class="font-display-lg-mobile text-[26px] leading-[34px] font-bold tracking-tight text-white">
+            Una nueva forma de conectar médicos y pacientes
+          </h2>
+<p class="font-body-md text-body-md text-[#DBE7F6] max-w-md mx-auto pt-1 leading-relaxed">
+            Centraliza tus citas y documentación médica con MAX.
+          </p>
+</div>
+<!-- Botón destacado -->
+<div class="w-full max-w-sm pt-space-xs flex flex-col gap-space-sm items-center">
+<a class="w-full min-h-[50px] px-space-lg rounded-xl bg-primary text-white font-label-lg flex items-center justify-center gap-space-xs shadow-[0_8px_24px_rgba(47,120,230,0.35)] hover:bg-primary-container transition-all" href="#hero">
+<span>Comenzar con MAX</span>
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</a>
+</div>
+<!-- 4 indicadores sutiles con iconos -->
+<div class="w-full grid grid-cols-2 gap-2 mt-space-sm text-left">
+<div class="flex items-center gap-2 p-2.5 rounded-xl bg-white/5 border border-white/10">
+<span class="material-symbols-outlined text-[#5AA9F3] text-[18px]">calendar_month</span>
+<span class="font-label-sm text-[12px] text-white">Gestión de citas</span>
+</div>
+<div class="flex items-center gap-2 p-2.5 rounded-xl bg-white/5 border border-white/10">
+<span class="material-symbols-outlined text-[#5AA9F3] text-[18px]">medication</span>
+<span class="font-label-sm text-[12px] text-white">Recetas</span>
+</div>
+<div class="flex items-center gap-2 p-2.5 rounded-xl bg-white/5 border border-white/10">
+<span class="material-symbols-outlined text-[#5AA9F3] text-[18px]">description</span>
+<span class="font-label-sm text-[12px] text-white">Informes médicos</span>
+</div>
+<div class="flex items-center gap-2 p-2.5 rounded-xl bg-white/5 border border-white/10">
+<span class="material-symbols-outlined text-[#5AA9F3] text-[18px]">biotech</span>
+<span class="font-label-sm text-[12px] text-white">Resultados y estudios</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 10. FOOTER -->
+<footer class="w-full bg-[#0B1A2A] border-t border-white/10 text-[#DBE7F6] px-gutter-mobile py-space-xl pb-28">
+<div class="flex flex-col gap-space-lg max-w-xl mx-auto">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center gap-2">
+<svg class="h-8 w-auto brightness-0 invert" fill="none" viewbox="0 0 160 48" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#FFFFFF" height="36" rx="10" width="36" x="2" y="6"></rect>
+<path d="M12 28L18 16L22 23L25 19L28 28" stroke="#0B1A2A" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+<circle cx="28" cy="28" fill="#0B1A2A" r="1.5"></circle>
+<text fill="#FFFFFF" font-family="'Plus Jakarta Sans', sans-serif" font-size="24" font-weight="800" letter-spacing="-0.5px" x="46" y="32">MAX</text>
+<circle cx="106" cy="20" fill="#FFFFFF" r="3.5"></circle>
+</svg>
+</div>
+<p class="font-body-md text-body-md text-[#DBE7F6] leading-relaxed">
+            Tecnología para una atención médica más organizada y conectada.
+          </p>
+</div>
+<div class="flex flex-col gap-space-xs font-label-md text-label-md">
+<span class="text-white uppercase tracking-wider font-semibold text-[11px] mb-1">Navegación</span>
+<a class="text-[#DBE7F6] hover:text-white transition-colors py-1 min-h-[36px] flex items-center" href="#hero">Inicio</a>
+<a class="text-[#DBE7F6] hover:text-white transition-colors py-1 min-h-[36px] flex items-center" href="#nosotros">Nosotros</a>
+<a class="text-[#DBE7F6] hover:text-white transition-colors py-1 min-h-[36px] flex items-center" href="#funcionalidades">Funcionalidades</a>
+<a class="text-[#DBE7F6] hover:text-white transition-colors py-1 min-h-[36px] flex items-center" href="#mision-vision">Misión y visión</a>
+<a class="text-[#DBE7F6] hover:text-white transition-colors py-1 min-h-[36px] flex items-center" href="#valores">Valores</a>
+<a class="text-[#DBE7F6] hover:text-white transition-colors py-1 min-h-[36px] flex items-center" href="#contacto">Contacto</a>
+</div>
+<div class="pt-space-sm border-t border-white/10 font-body-sm text-body-sm text-[#DBE7F6]/70">
+<p>© 2026 MAX. Todos los derechos reservados.</p>
+</div>
+</div>
+</footer>
+</main>
+<!-- BOTTOM MOBILE NAV -->
+<nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/90 backdrop-blur-xl border-t border-[#DBE7F6]" data-active-classes="text-primary font-semibold">
+<div class="flex justify-around items-center h-16 px-space-xs">
+<a aria-current="page" class="flex flex-col items-center justify-center gap-1 min-w-[44px] min-h-[44px] px-2 py-1 text-primary font-semibold transition-colors" data-path="inicio" href="#hero">
+<span class="material-symbols-outlined text-[22px]">home</span>
+<span class="font-label-sm text-[11px]">Inicio</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 min-w-[44px] min-h-[44px] px-2 py-1 text-on-surface-variant hover:text-primary transition-colors" data-path="funcionalidades" href="#funcionalidades">
+<span class="material-symbols-outlined text-[22px]">tune</span>
+<span class="font-label-sm text-[11px]">Funciones</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 min-w-[44px] min-h-[44px] px-2 py-1 text-on-surface-variant hover:text-primary transition-colors" data-path="contacto" href="#contacto">
+<span class="material-symbols-outlined text-[22px]">touch_app</span>
+<span class="font-label-sm text-[11px]">Comenzar</span>
+</a>
+</div>
+</nav>
+<script>
+    const toggleBtn = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (toggleBtn && mobileMenu) {
+      toggleBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+      });
+    }
+  </script>
+</body></html>
