@@ -1,0 +1,41 @@
+name: MAX Academic Landing CI
+on:
+  push:
+    branches: [main, ci/max-tests-actions]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - name: Contratos HTML y recursos HTTP locales
+        run: python3 scripts/test_ci.py
+      - name: Reportes incluso ante fallo
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: landing-academic-reports-${{ github.sha }}
+          path: reports/
+          retention-days: 30
+      - name: Preparar el mismo sitio estático sin desplegar
+        run: |
+          mkdir -p delivery/site
+          cp index.html delivery/site/
+          cp -R public delivery/site/
+          printf '%s\n' "${GITHUB_SHA}" > delivery/commit.txt
+          (cd delivery && find site -type f -print0 | sort -z | xargs -0 sha256sum > SHA256SUMS)
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: landing-academic-candidate-${{ github.sha }}
+          path: delivery/
+          retention-days: 14
